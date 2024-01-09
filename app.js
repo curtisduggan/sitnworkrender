@@ -4,6 +4,27 @@ const port = process.env.PORT || 3001;
 
 app.get("/", (req, res) => res.type('html').send(html));
 
+app.get("/get-coworking", (req, res) => {
+    const city = req.query.city;
+    let response;
+
+    switch(city.toLowerCase()) {
+        case 'victoria':
+            response = "Curt's Coworking Bonanza";
+            break;
+        case 'vancouver':
+            response = "Curt's Van Jam";
+            break;
+        case 'whistler':
+            response = "Curt's Ski Slopes";
+            break;
+        default:
+            response = "We are under construction";
+    }
+
+    res.send(response);
+});
+
 const server = app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
 server.keepAliveTimeout = 120 * 1000;
